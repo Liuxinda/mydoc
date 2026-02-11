@@ -1,34 +1,44 @@
 // @ts-check
-const { themes } = require('prism-react-renderer');
+// `@type` JSDoc annotations allow editor autocompletion and type checking
+// (when paired with `@ts-check`).
+// There are various equivalent ways to declare your Docusaurus config.
+// See: https://docusaurus.io/docs/api/docusaurus-config
+
+import {themes as prismThemes} from 'prism-react-renderer';
+
+// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'IT知识学习网站',
-  tagline: '编程教程学习平台',
+  title: 'My Site',
+  tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
-  url: 'https://your-domain.com',
-  // baseUrl  需要改成你的仓库名，如果你启用了GitHub Pages，请改成你的仓库名,默认是/
-  baseUrl: 'mydoc',
-  // 对于死链接，默认是warn，可以改成其他的选项，比如ignore,throw
-  onBrokenLinks: 'warn',
-
-  i18n: {
-    defaultLocale: 'zh-CN',
-    locales: ['zh-CN'],
+  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
+  future: {
+    v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  themes: [
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        hashed: true,
-        language: ["en", "zh"], // 支持中英文
-        indexBlog: true, // 是否索引博客
-        indexDocs: true,
-      },
-    ],
-  ],
+  // Set the production url of your site here
+  url: 'https://your-docusaurus-site.example.com',
+  // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
+  baseUrl: 'mydoc',
+
+  // GitHub pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: 'facebook', // Usually your GitHub org/user name.
+  projectName: 'docusaurus', // Usually your repo name.
+
+  onBrokenLinks: 'throw',
+
+  // Even if you don't use internationalization, you can use this field to set
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
+  i18n: {
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans'],
+  },
 
   presets: [
     [
@@ -36,11 +46,29 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: './sidebars.js',
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl:
+            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: false, // 禁用博客
+        blog: {
+          showReadingTime: true,
+          feedOptions: {
+            type: ['rss', 'atom'],
+            xslt: true,
+          },
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl:
+            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // Useful options to enforce blogging best practices
+          onInlineTags: 'warn',
+          onInlineAuthors: 'warn',
+          onUntruncatedBlogPosts: 'warn',
+        },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: './src/css/custom.css',
         },
       }),
     ],
@@ -49,85 +77,82 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Replace with your project's social card
+      image: 'img/docusaurus-social-card.jpg',
+      colorMode: {
+        respectPrefersColorScheme: true,
+      },
       navbar: {
-        title: 'IT知识学习网站',
+        title: 'My Site',
         logo: {
-          alt: 'Logo',
+          alt: 'My Site Logo',
           src: 'img/logo.svg',
         },
         items: [
-          
           {
-            to: '/docs/0',
-            label: '📘文档',
+            type: 'docSidebar',
+            sidebarId: 'tutorialSidebar',
             position: 'left',
+            label: 'Tutorial',
           },
-          // 类型3：下拉菜单
+          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            type: 'dropdown',
-            label: '更多',
-            position: 'left',
-            items: [
-              {
-                label: 'github',
-                to: 'https://github.com/wxhzhwxhzh',
-              },
-              {
-                label: '文档',
-                to: '/docs/0',
-              },
-              {
-                label: 'AIChatOS',
-                href: 'https://cht18.aichatosclx.com/',
-              },
-
-            ],
-          },
-          //右边链接
-          // 类型6：搜索框
-          {
-            type: 'search',
-            position: 'right',
-          },
-
-          // 类型7：语言切换
-          {
-            type: 'localeDropdown',
-            position: 'right',
-          },
-          {
-            href: 'https://github.com/wxhzhwxhzh',
+            href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
             position: 'right',
           },
         ],
       },
-
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} IT知识学习网站`,
+        links: [
+          {
+            title: 'Docs',
+            items: [
+              {
+                label: 'Tutorial',
+                to: '/docs/intro',
+              },
+            ],
+          },
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'Stack Overflow',
+                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              },
+              {
+                label: 'Discord',
+                href: 'https://discordapp.com/invite/docusaurus',
+              },
+              {
+                label: 'X',
+                href: 'https://x.com/docusaurus',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/facebook/docusaurus',
+              },
+            ],
+          },
+        ],
+        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
-
       prism: {
-        theme: themes.github,
-        darkTheme: themes.nightOwl,
-      },
-      // -----------插件----------
-      plugins: [
-        '@docusaurus/plugin-search',
-        // 其他插件...
-      ],
-
-      // ---------- 公告栏 ----------
-      announcementBar: {
-        id: 'support_us',
-        content:
-          '⭐️ 如果你喜欢这个网站，请在 <a target="_blank" rel="noopener noreferrer" href="https://github.com/wxhzhwxhzh">GitHub</a> 给我们一个 Star！',
-        backgroundColor: '#fafbfc',
-        textColor: '#091E42',
-        isCloseable: true,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
       },
     }),
 };
 
-module.exports = config;
+export default config;
