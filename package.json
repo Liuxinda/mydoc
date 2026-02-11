@@ -1,5 +1,5 @@
 {
-  "name": "my-tutorial-site",
+  "name": "my-website",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,6 @@
   "dependencies": {
     "@docusaurus/core": "3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
-    "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
